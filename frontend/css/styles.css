@@ -1,0 +1,23 @@
+/* ---------- Ajustes responsive mínimos ---------- */
+
+/* Tipografías y medidas base para legibilidad en móvil */
+body { font-size: 16px; line-height: 1.4; }
+
+/* Imágenes fluidas dentro de cards/listas */
+img, .img-fluid { max-width: 100%; height: auto; display: block; }
+
+/* Tarjetas/ítems en grilla flexible (cuando uses <div class="row">) */
+.card { color: #000; } /* texto negro dentro de cards (sobre fondo blanco) */
+.card .btn { white-space: nowrap; }
+
+/* Ajustes de contenedor general para que no quede todo pegado a los bordes */
+main, .container { padding-left: 1rem; padding-right: 1rem; }
+
+/* Botones flotantes (por si ya tenías estilos previos) */
+a.whatsapp, .carrito { text-decoration: none; }
+
+/* Espaciados más amables en headings */
+h1, h2, h3 { margin-top: 1rem; margin-bottom: .75rem; }
+
+/* En admin/promos, que las imágenes no se desborden */
+.promo img { max-width: 100%; height: auto; }

@@ -1,66 +1,63 @@
-
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Productos</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+  <!-- opcional: bootstrap para estilos rápidos -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 
-{% include 'header.html' %}
+  {% include 'header.html' %}
 
-<h2 style="margin-top: 2rem;">
-  {% if rol == 'admin' %}
-    GESTIÓN DE PRODUCTOS
-  {% else %}
-    BUSCAR PRODUCTOS
-  {% endif %}
-</h2>
+  <main class="container my-4">
+    <h2 class="mb-3">
+      {% if rol == 'admin' %}GESTIÓN DE PRODUCTOS{% else %}BUSCAR PRODUCTOS{% endif %}
+    </h2>
 
-<div class="admin-product-box">
-  {% if rol == 'admin' %}
-    <form action="/add_producto" method="post" style="display: flex; justify-content: center; align-items: center;">
-      <input type="text" name="nombre" placeholder="Nuevo producto" required>
-      <button type="submit">AGREGAR</button>
-    </form>
-  {% else %}
-    <form action="/buscar" method="get" style="display: flex; justify-content: center; align-items: center; margin-top: 0; margin-left: 20px;">
-      <input type="text" name="query" placeholder="Buscar producto..." required>
-      <button type="submit">🔍</button>
-    </form>
-  {% endif %}
-</div>
-
-<ul class="producto-lista">
-  {% for producto in productos %}
-    <li class="producto-item">
-      {{ producto }}
+    <!-- barra de acciones (según rol) -->
+    <div class="mb-4">
       {% if rol == 'admin' %}
-        <a href="/delete_producto/{{ loop.index0 }}">
-          <button class="boton-comprar">ELIMINAR</button>
-        </a>
+        <form action="/add_producto" method="post" class="d-flex gap-2">
+          <input class="form-control" type="text" name="nombre" placeholder="Nuevo producto" required />
+          <button class="btn btn-success" type="submit">AGREGAR</button>
+        </form>
       {% else %}
-        <form action="/agregar_carrito" method="post">
-          <input type="hidden" name="nombre" value="{{ producto }}">
-          <input type="hidden" name="tipo" value="producto">
-          <button type="submit" class="boton-comprar">COMPRAR</button>
+        <form action="/buscar" method="get" class="d-flex gap-2">
+          <input class="form-control" type="text" name="query" placeholder="Buscar producto..." required />
+          <button class="btn btn-primary" type="submit">🔍</button>
         </form>
       {% endif %}
-    </li>
-  {% endfor %}
-</ul>
+    </div>
 
-{% include 'footer.html' %}
+    <!-- listado de productos -->
+    <ul class="list-group">
+      {% for producto in productos %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <span>{{ producto }}</span>
 
+          {% if rol == 'admin' %}
+            <a class="btn btn-outline-danger btn-sm" href="/delete_producto/{{ loop.index0 }}">ELIMINAR</a>
+          {% else %}
+            <form action="/agregar_carrito" method="post" class="m-0">
+              <input type="hidden" name="nombre" value="{{ producto }}">
+              <input type="hidden" name="tipo" value="producto">
+              <button class="btn btn-primary btn-sm" type="submit">COMPRAR</button>
+            </form>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  </main>
 
+  {% include 'footer.html' %}
 
-
-  <!-- 🛒 Carrito y WhatsApp flotante -->
+  <!-- flotantes -->
   <a href="/carrito" class="carrito">🛒</a>
   <a href="#" class="whatsapp">WhatsApp</a>
-</body>
 
+  <!-- opcional: bootstrap js -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>
