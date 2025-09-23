@@ -1,35 +1,97 @@
 {% include 'header.html' %}
 
-<h2 style="margin-top: 2rem;">CARRITO DE COMPRAS</h2>
+<main class="container my-4">
+  <div class="d-flex align-items-center justify-content-between mb-3">
+    <h2 class="mb-0">Carrito de compras</h2>
+    <div class="d-none d-md-block text-white-50 small">
+      <!-- espacio para info/ayuda si la querés -->
+    </div>
+  </div>
 
-<ul class="producto-lista">
-  {% if carrito %}
-    {% for item in carrito %}
-      <li class="producto-item">
-        {{ item.tipo|capitalize }}: {{ item.nombre }}
-        <a href="/quitar_del_carrito/{{ loop.index0 }}">
-          <button class="boton-comprar">QUITAR</button>
-        </a>
-      </li>
-    {% endfor %}
+  {% if carrito and carrito|length > 0 %}
+    <!-- Lista de items -->
+    <div class="row g-3">
+      {% for item in carrito %}
+      <div class="col-12">
+        <div class="card shadow-sm">
+          <div class="card-body d-flex gap-3 flex-wrap align-items-center">
+            <!-- Imagen del producto si existiera -->
+            {% if item.imagen %}
+              <img src="{{ url_for('static', filename='uploads/' + item.imagen) }}"
+                   alt="{{ item.nombre }}"
+                   class="img-fluid rounded"
+                   style="width:72px;height:72px;object-fit:cover;">
+            {% endif %}
+
+            <div class="flex-grow-1">
+              <div class="fw-semibold">{{ item.nombre or 'Producto' }}</div>
+              <div class="text-muted small">
+                {% if item.descripcion %}{{ item.descripcion }} · {% endif %}
+                {% if item.cantidad %}Cant: {{ item.cantidad }}{% endif %}
+              </div>
+            </div>
+
+            <div class="ms-auto text-end">
+              {% if item.precio %}
+                <div class="fw-bold">$
+                  {{ "%.2f"|format(item.precio) }}
+                </div>
+              {% endif %}
+              <a href="/quitar_del_carrito/{{ loop.index0 }}"
+                 class="btn btn-outline-danger btn-sm mt-2">Quitar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Resumen y acciones -->
+    <div class="row mt-4">
+      <div class="col-12 col-lg-6 ms-auto">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <span class="fw-semibold">Total</span>
+              <span class="fs-5 fw-bold">
+                {% if total is defined %}$
+                  {{ "%.2f"|format(total) }}
+                {% else %}
+                  <!-- si tu backend aún no calcula total, lo oculto elegantemente -->
+                  —
+                {% endif %}
+              </span>
+            </div>
+
+            <div class="d-grid gap-2">
+              <!-- Ajustá las rutas a las que ya tengas en tu app -->
+              <a href="/finalizar_compra" class="btn btn-primary btn-lg">
+                Finalizar compra
+              </a>
+              <a href="/vaciar_carrito" class="btn btn-outline-secondary">
+                Vaciar carrito
+              </a>
+              <a href="/productos" class="btn btn-dark">
+                Seguir comprando
+              </a>
+            </div>
+
+            <!-- Info de ayuda -->
+            <p class="small text-muted mt-3 mb-0">
+              Al finalizar, tu pedido se enviará al WhatsApp del negocio con el detalle de productos.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
   {% else %}
-    <p>No hay productos ni promociones en el carrito.</p>
+    <!-- Carrito vacío -->
+    <div class="text-center text-white-50 py-5">
+      <h5 class="mb-3">Tu carrito está vacío</h5>
+      <a href="/productos" class="btn btn-primary">Ver productos</a>
+    </div>
   {% endif %}
-</ul>
-
-{% if carrito %}
-  <form action="/finalizar_compra" method="post" style="margin-top: 2rem;">
-    <button type="submit" class="boton-comprar" style="font-size: 18px; padding: 15px 30px;">FINALIZAR COMPRA</button>
-  </form>
-
-  {% set mensaje = "Hola, quiero realizar la siguiente compra:%0A" %}
-  {% for item in carrito %}
-    {% set mensaje = mensaje + "- " + item.tipo + ": " + item.nombre + "%0A" %}
-  {% endfor %}
-
-  <a class="whatsapp" target="_blank" href="https://wa.me/5493856123456?text={{ mensaje }}">Enviar por WhatsApp</a>
-{% endif %}
-
-<a href="/" class="carrito">⬅️ Volver</a>
+</main>
 
 {% include 'footer.html' %}
