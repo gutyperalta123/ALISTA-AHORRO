@@ -1,0 +1,305 @@
+/* 🎨 Estilo general del sitio */
+body {
+  margin: 0; /* Elimina márgenes por defecto */
+  font-family: sans-serif; /* Fuente del texto */
+  text-align: center; /* Centra el texto */
+  background-color: black; /* Fondo negro */
+  color: white; /* Texto blanco */
+}
+
+/* 📌 Encabezado principal fijo arriba */
+.main-header {
+  position: sticky; /* Se mantiene visible al hacer scroll */
+  top: 0;
+  width: 100%;
+  background-color: #ff0f5c; /* Rosa fuerte */
+  display: flex; /* Distribuye los elementos en fila */
+  justify-content: space-between; /* Espaciado entre elementos */
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid white;
+  z-index: 1000;
+  box-sizing: border-box;
+}
+
+/* 🧭 Caja que contiene el buscador (a la izquierda del header) */
+.search-box {
+  flex: 1;
+  text-align: left;
+}
+
+/* 🔍 Formulario de búsqueda */
+.search-form {
+  display: flex;
+  align-items: center;
+}
+
+.search-form input {
+  padding: 5px;
+  border: none;
+  border-radius: 5px 0 0 5px; /* Redondea esquinas izquierdas */
+}
+
+.search-form button {
+  padding: 5px;
+  border: none;
+  background-color: gold; /* Color dorado */
+  color: black;
+  border-radius: 0 5px 5px 0; /* Redondea esquinas derechas */
+  cursor: pointer;
+  margin-left: 8px;   /* aleja el botón del input */
+  margin-top: -3px;   /* lo sube un poquito */
+
+}
+
+/* 🛒 Título del sitio (centro del header) */
+.titulo-box {
+  flex: 1;
+  text-align: center;
+}
+
+.titulo-sitio {
+  margin: 0;
+  font-size: 28px;
+  color: white;
+}
+
+/* 📁 Menú de navegación (derecha del header) */
+.menu-box {
+  flex: 1;
+  text-align: right;
+}
+
+nav a {
+  margin: 0 0.5rem;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+
+/* 🎁 Contenedor de promociones (usa Flexbox) */
+.promo-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem;
+}
+
+/* 🧃 Cada promoción individual */
+.promo {
+  border: 2px solid black;
+  padding: 1rem;
+  width: 200px;
+}
+
+/* 🦶 Pie de página */
+footer {
+  position: relative;
+  padding: 1rem;
+}
+
+/* 📞 Botón flotante de WhatsApp */
+.whatsapp {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background: black;
+  color: white;
+  padding: 10px;
+  text-decoration: none;
+}
+
+/* 🛒 Botón flotante del carrito */
+.carrito {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  font-size: 2rem;
+  background: gold;
+  padding: 10px;
+}
+
+/* 🔐 Caja de login */
+.login-box {
+  margin: 3rem auto;
+  border: 2px solid violet;
+  width: 300px;
+  padding: 2rem;
+  background-color: #111;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 0 12px violet;
+}
+
+.login-box h2 {
+  margin-bottom: 1rem;
+  color: violet;
+  font-size: 1.5rem;
+}
+
+.login-box input[type="text"],
+.login-box input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  background-color: #222;
+  color: white;
+  border: 1px solid violet;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.login-box button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 1rem;
+  background-color: violet;
+  color: black;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-box button:hover {
+  background-color: #cc66ff;
+}
+
+/* 📦 Caja para agregar productos (solo administrador) */
+.admin-product-box {
+  border: 1px solid violet;
+  padding: 20px;
+  border-radius: 10px;
+  width: 50%;
+  margin: 30px auto;
+  background-color: #1a1a1a;
+  text-align: center;
+}
+
+/* 📝 Input del administrador para agregar productos */
+.admin-product-box input[type="text"] {
+  width: 70%;
+  padding: 12px;
+  font-size: 18px;
+  border-radius: 8px;
+  border: 1px solid violet;
+  background-color: #222;
+  color: white;
+  margin-bottom: 10px;
+}
+
+/* ➕ Botón AGREGAR para administrador */
+.admin-product-box button {
+  padding: 12px 20px;
+  font-size: 16px;
+  background-color: violet;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: black;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.admin-product-box button:hover {
+  background-color: #ff0f5c;
+  color: white;
+}
+
+/* 🧾 Lista general de productos */
+.producto-lista {
+  list-style: none;
+  padding: 0;
+  margin: 2rem auto;
+  width: 50%;
+}
+
+/* 🧃 Cada producto individual */
+.producto-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #111;
+  margin: 10px 0;
+  padding: 10px 20px;
+  border: 1px solid violet;
+  border-radius: 8px;
+  color: white;
+}
+
+/* 🟣 Botones como AGREGAR, ELIMINAR, COMPRAR */
+.producto-item button,
+.producto-item a {
+  background-color: violet;
+  color: black;
+  font-weight: bold;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  margin-left: 8px;
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.producto-item button:hover,
+.producto-item a:hover {
+  background-color: #cc66ff;
+  color: white;
+}
+
+/* 📥 Formulario para agregar productos (versión moderna) */
+.form-agregar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.form-agregar input[type="text"] {
+  width: 78%;
+  padding: 10px;
+  font-size: 20px;
+  border: 1px solid violet;
+  border-radius: 1px;
+  background-color: #222;
+  color: white;
+}
+
+.form-agregar button {
+  padding: 12px 20px;
+  background-color: violet;
+  color: black;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form-agregar button:hover {
+  background-color: #cc66ff;
+}
+
+/* ❌ Botón rojo de ELIMINAR producto */
+.boton-eliminar {
+  background-color: violet;
+  color: black;
+  font-weight: bold;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.boton-eliminar:hover {
+  background-color: #ff0f5c;
+  color: white;
+}

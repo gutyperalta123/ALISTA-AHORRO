@@ -1,0 +1,47 @@
+
+
+<!-- header.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>ALISTA AHORRO</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+
+<!-- Encabezado fijo superior con fondo rosa y 3 secciones -->
+<!-- templates/header.html -->
+<!-- templates/header.html -->
+
+<!-- header.html -->
+<header class="main-header">
+  <!-- 🔍 Formulario de búsqueda -->
+  <div class="search-box">
+    <form class="search-form" action="/buscar" method="GET">
+      <input type="text" name="query" placeholder="Buscar productos...">
+      <button type="submit">🔍</button>
+    </form>
+  </div>
+
+  <!-- 🛍️ Título del sitio -->
+  <div class="titulo-box">
+    <h1 class="titulo-sitio">ALISTA AHORRO</h1>
+  </div>
+
+  <!-- 📁 Menú de navegación -->
+  <div class="menu-box">
+  <nav>
+  <a href="/">INICIO</a>
+  <a href="/quienes-somos">QUIENES SOMOS</a>
+  <a href="/productos">PRODUCTOS</a>
+
+  {% if session.get('usuario') %}
+    <a href="/logout">CERRAR SESION</a>
+  {% else %}
+    <a href="/login">INICIAR SESION</a>
+  {% endif %}
+</nav>
+
+  </div>
+</header>

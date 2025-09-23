@@ -1,0 +1,10 @@
+{% include 'header.html' %}
+<div class="login-box">
+    <h2>INICIAR SESION</h2>
+    <form action="/login" method="post">
+        <input type="text" name="usuario" placeholder="USUARIO" required>
+        <input type="password" name="contrasena" placeholder="CONTRASEÑA" required>
+        <button type="submit">INGRESAR</button>
+    </form>
+</div>
+{% include 'footer.html' %}

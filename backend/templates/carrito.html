@@ -1,0 +1,35 @@
+{% include 'header.html' %}
+
+<h2 style="margin-top: 2rem;">CARRITO DE COMPRAS</h2>
+
+<ul class="producto-lista">
+  {% if carrito %}
+    {% for item in carrito %}
+      <li class="producto-item">
+        {{ item.tipo|capitalize }}: {{ item.nombre }}
+        <a href="/quitar_del_carrito/{{ loop.index0 }}">
+          <button class="boton-comprar">QUITAR</button>
+        </a>
+      </li>
+    {% endfor %}
+  {% else %}
+    <p>No hay productos ni promociones en el carrito.</p>
+  {% endif %}
+</ul>
+
+{% if carrito %}
+  <form action="/finalizar_compra" method="post" style="margin-top: 2rem;">
+    <button type="submit" class="boton-comprar" style="font-size: 18px; padding: 15px 30px;">FINALIZAR COMPRA</button>
+  </form>
+
+  {% set mensaje = "Hola, quiero realizar la siguiente compra:%0A" %}
+  {% for item in carrito %}
+    {% set mensaje = mensaje + "- " + item.tipo + ": " + item.nombre + "%0A" %}
+  {% endfor %}
+
+  <a class="whatsapp" target="_blank" href="https://wa.me/5493856123456?text={{ mensaje }}">Enviar por WhatsApp</a>
+{% endif %}
+
+<a href="/" class="carrito">⬅️ Volver</a>
+
+{% include 'footer.html' %}

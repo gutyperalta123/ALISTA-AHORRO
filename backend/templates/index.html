@@ -1,0 +1,45 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>ALISTA AHORRO</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+  <!-- ✅ Incluimos solo el header.html una vez -->
+  {% include 'header.html' %}
+
+  <!-- 🏠 Contenido principal -->
+  <main style="padding: 2rem;">
+    <h2>Bienvenido a <strong>ALISTA AHORRO</strong></h2>
+    <p>Elegí tus productos y hacé tu compra más fácil, rápida y directa desde tu celular.</p>
+  </main>
+
+  <!-- 🎁 Sección de promociones -->
+  <div class="promo-container">
+    {% for promo in promos %}
+      <div class="promo">
+        <h3>{{ promo.titulo }}</h3>
+        <img src="{{ url_for('static', filename='uploads/' + promo.imagen) }}" alt="Promo" width="100%">
+        <p>{{ promo.cuerpo }}</p>
+        <form action="/agregar_carrito" method="POST">
+  <input type="hidden" name="tipo" value="promocion">
+  <input type="hidden" name="nombre" value="{{ promo['titulo'] }} - {{ promo['cuerpo'] }}">
+  <button type="submit" class="boton-comprar">COMPRAR</button>
+</form>
+
+      </div>
+    {% endfor %}
+  </div>
+
+  <!-- 📞 WhatsApp y carrito -->
+  <a href="#" class="whatsapp">WhatsApp</a>
+  <a href="/carrito" class="carrito">🛒</a>
+
+  <!-- 👣 Footer -->
+  {% include 'footer.html' %}
+
+</body>
+</html>
